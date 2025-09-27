@@ -1,0 +1,8 @@
+AIC2025
+testBed
+50 40
+rotational
+0
+1
+6 6
+43 33
