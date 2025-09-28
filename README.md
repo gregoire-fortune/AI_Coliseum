@@ -188,7 +188,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- 📧 **Email**: [contact@gregoire-fortune.com](mailto:contact@gregoire-fortune.com)
 - 🐙 **GitHub**: [@gregoire-fortune](https://github.com/gregoire-fortune)
 - 🌐 **Project Link**: [AI_Coliseum](https://github.com/gregoire-fortune/AI_Coliseum)
 
