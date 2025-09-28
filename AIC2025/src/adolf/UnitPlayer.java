@@ -28,7 +28,7 @@ public class UnitPlayer {
 
 
         //Pre-Message
-        int firstEnemyBedMessage = firstEnemyBedX*100+firstEnemyBedY;
+        int firstEnemyBedMessage = firstEnemyBedX * 100 + firstEnemyBedY;
         
 
 

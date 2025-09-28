@@ -1,0 +1,8 @@
+AIC2025
+verticalBed
+50 40
+vertical
+0
+1
+11 10
+11 29

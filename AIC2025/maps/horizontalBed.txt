@@ -1,0 +1,8 @@
+AIC2025
+horizontalBed
+50 40
+horizontal
+0
+1
+22 9
+27 9
