@@ -1,6 +1,6 @@
 # 🏛️ AI Coliseum - Competitive AI Bot Arena
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](.) [![Java](https://img.shields.io/badge/Java-17+-blue)](.) [![License](https://img.shields.io/badge/license-MIT-green)](.)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](.) [![Java](https://img.shields.io/badge/Java-1.8+-blue)](.) [![License](https://img.shields.io/badge/license-MIT-green)](.)
 
 ## 📖 Overview
 
@@ -58,7 +58,7 @@ AI_Coliseum/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- ☕ **Java 17+**
+- ☕ **Java 1.8+**
 - 🐜 **Apache Ant** (for building)
 - 🖥️ **Windows/Linux/macOS** compatible
 
