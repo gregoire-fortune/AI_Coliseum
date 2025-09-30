@@ -4,7 +4,7 @@
 
 ## 📖 Overview
 
-AI Coliseum is a competitive artificial intelligence platform where autonomous bots battle in strategic combat scenarios. Based on the **AIC2025 framework**, this repository hosts multiple AI bot implementations designed to compete in resource gathering, tactical combat, and territorial control.
+AI Coliseum is a competitive artificial intelligence platform where autonomous bots battle in strategic combat scenarios. Based on the **AIC2025 framework**, this repository hosts multiple AI bot implementations for research, competition, and fun.
 
 ## 🎯 Project Structure
 
@@ -12,10 +12,12 @@ AI Coliseum is a competitive artificial intelligence platform where autonomous b
 AI_Coliseum/
 ├── AIC2025/                    # Main competition framework
 │   ├── src/                    # Bot source code
-│   │   ├── baibars/           # 🏆 Baibars Bot (Main project)
+│   │   ├── baibars/           # First bot in the evolving alphabetical series
+│   │   ├── césar/             # Next bot in the series (to be created and improved)
 │   │   ├── demoplayer/        # Reference implementation
-│   │   ├── meuli3/            # Alternative bot
+│   │   ├── meuli3/            # Bot développé par un contributeur externe (non présent dans ce dépôt)
 │   │   ├── adolf/             # Experimental bot
+│   │   ├── automate/          # Bot développé par un contributeur externe (non présent dans ce dépôt)
 │   │   └── nullplayer/        # Minimal bot
 │   ├── maps/                  # Battle arenas
 │   ├── games/                 # Match logs and replays
@@ -27,7 +29,16 @@ AI_Coliseum/
 
 ## 🤖 Bot Implementations
 
-### 🏆 **Baibars** - *Main Project*
+### 🔤 **Alphabetical Bot Series**
+
+The main bots in this repository are developed as an evolving alphabetical series. The first bot is **Baibars**, and future bots (e.g., **César**, etc.) will follow in alphabetical order, each representing an improvement or new strategy. Whenever a bot is improved, a new bot is created, named after the next letter in the alphabet.
+
+#### Example:
+- **Baibars** – The starting bot of the series.
+- **César** – The next bot, to be created and improved.
+- Future bots: D..., E..., etc.
+
+**Baibars** – *First Alphabetical Bot*
 > *"The Sultan of Strategic AI"*
 
 **Inspired by:** Baibars I (1223-1277), legendary military strategist  
@@ -51,7 +62,8 @@ AI_Coliseum/
 
 ### 🎯 **Other Bots**
 - **demoplayer**: Reference implementation and training opponent
-- **meuli3**: Alternative strategic approach
+- **meuli3**: Bot développé par un contributeur externe (non présent dans ce dépôt)
+- **automate**: Bot développé par un contributeur externe (non présent dans ce dépôt)
 - **adolf**: Experimental aggressive tactics  
 - **nullplayer**: Minimal baseline implementation
 
@@ -128,16 +140,6 @@ ant run -Dpackage1=baibars -Dpackage2=meuli3 -Dmap=testBed
 - ⏱️ **Optimize for 2000-turn matches**
 - 🧪 **Test against multiple opponents**
 
-## 📊 Performance Metrics
-
-### Baibars Bot Stats
-- **Win Rate**: 60%+ against demoplayer
-- **Primary Victory**: Total Weight accumulation
-- **Compilation**: ✅ Zero warnings
-- **Architecture**: 6 modular services
-- **Anti-oscillation**: ✅ Implemented
-- **Phase Strategy**: ✅ 2000-turn optimized
-
 ## 🎯 Competition Strategy
 
 The AI Coliseum employs multiple strategic approaches:
@@ -195,4 +197,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *"In the arena of artificial minds, only the most strategic shall triumph"* ⚔️
 
-**Current Branch:** `Baibars` | **Last Updated:** September 29, 2025)
+**Current Branch:** `main` | **Last Updated:** September 30, 2025
