@@ -6,59 +6,107 @@ public class UnitPlayer {
 
     //This array will be useful
     Direction[] directions = Direction.values();
+    
+    // Variables globales pour éviter les recalculs
+    private int mapWidth;
+    private int mapHeight;
+    private int centerX;
+    private int centerY;
+    private Location centerLocation;
+    private Location firstBed;
+    private Location firstEnemyBed;
+    private int firstEnemyBedMessage;
+    private String detectedSymmetryType;
+    private boolean isInitialized = false;
+
+    /**
+     * Détermine la position du lit ennemi en fonction du type de symétrie de la carte
+     * @param uc le UnitController
+     * @param myBed la position de notre lit
+     * @return la position estimée du lit ennemi
+     */
+    public Location calculateEnemyBedPosition(UnitController uc, Location myBed) {
+        // Calculs directs des trois symétries possibles
+        int centralX = mapWidth - myBed.x - 1;
+        int centralY = mapHeight - myBed.y - 1;
+        int horizontalY = mapHeight - myBed.y - 1;
+        int verticalX = mapWidth - myBed.x - 1;
+        
+        // Distances au carré pour éviter sqrt()
+        int centerDx = centerX - myBed.x;
+        int centerDy = centerY - myBed.y;
+        int myDist = centerDx * centerDx + centerDy * centerDy;
+        
+        // Distance centrale
+        centerDx = centerX - centralX;
+        centerDy = centerY - centralY;
+        int centralDiff = Math.abs(myDist - (centerDx * centerDx + centerDy * centerDy));
+        
+        // Distance horizontale
+        centerDx = centerX - myBed.x;
+        centerDy = centerY - horizontalY;
+        int horizontalDiff = Math.abs(myDist - (centerDx * centerDx + centerDy * centerDy));
+        
+        // Distance verticale
+        centerDx = centerX - verticalX;
+        centerDy = centerY - myBed.y;
+        int verticalDiff = Math.abs(myDist - (centerDx * centerDx + centerDy * centerDy));
+        
+        // Sélection directe de la meilleure symétrie
+        if (horizontalDiff < centralDiff && horizontalDiff <= verticalDiff) {
+            detectedSymmetryType = "horizontale";
+            return new Location(myBed.x, horizontalY);
+        }
+        if (verticalDiff < centralDiff) {
+            detectedSymmetryType = "verticale";
+            return new Location(verticalX, myBed.y);
+        }
+        detectedSymmetryType = "centrale";
+        return new Location(centralX, centralY);
+    }
 
     public void run(UnitController uc) {
-        // Code to be executed only at the beginning of the unit's lifespan
+        // Initialisation une seule fois
+        if (!isInitialized) {
+            mapWidth = uc.getMapWidth();
+            mapHeight = uc.getMapHeight();
+            centerX = mapWidth >> 1; // Division par 2 optimisée
+            centerY = mapHeight >> 1;
+            centerLocation = new Location(centerX, centerY);
+            firstBed = uc.getAllBedsInfo()[0].getLocation();
+            firstEnemyBed = calculateEnemyBedPosition(uc, firstBed);
+            firstEnemyBedMessage = firstEnemyBed.x * 100 + firstEnemyBed.y;
+            isInitialized = true;
+        }
         
-        int mapWidth = uc.getMapWidth();
-        int mapHeight = uc.getMapHeight();
-        int centerX = mapWidth / 2;
-        int centerY = mapHeight / 2;
-
-        Location centerLocation = new Location(centerX, centerY);
-        BedInfo[] beds = uc.getAllBedsInfo();
-
-        Location firstBed = beds[0].getLocation();
-        int firstBedX = firstBed.x;
-        int firstBedY = firstBed.y;
-
-        Location firstEnemyBed = new Location(mapWidth - firstBedX - 1, mapHeight - firstBedY - 1);
-        int firstEnemyBedX = firstEnemyBed.x;
-        int firstEnemyBedY = firstEnemyBed.y;
-
-
-        //Pre-Message
-        int firstEnemyBedMessage = firstEnemyBedX*100+firstEnemyBedY;
-        
-
-
         while (true) {
-            // Code to be executed every round
-
-            /*If not on the map, find an empty bed and spawn there*/
-            if (!uc.isOnMap()){
-                beds = uc.getAllBedsInfo();
-                for (BedInfo bed : beds){
-                    if (uc.canSpawn(bed.getLocation())) uc.spawn(bed.getLocation());
+            // Spawn si pas sur la carte
+            if (!uc.isOnMap()) {
+                BedInfo[] beds = uc.getAllBedsInfo();
+                for (BedInfo bed : beds) {
+                    if (uc.canSpawn(bed.getLocation())) {
+                        uc.spawn(bed.getLocation());
+                        break;
+                    }
                 }
             }
 
+            // Action principale - message compact
             uc.println(firstEnemyBedMessage);
 
-            /*Move in a random direction*/
-            int randomDir = (int)(uc.getRandomDouble()*8);
-            Direction dir = Direction.values()[randomDir];
+            // Mouvement aléatoire
+            Direction dir = directions[(int)(uc.getRandomDouble() * 8)];
             if (uc.canMove(dir)) uc.move(dir);
 
-            /*Try crafting a random craftable*/
-            int randomCraftable = (int)(uc.getRandomDouble()*Craftable.values().length);
-            if (uc.canCraft(Craftable.values()[randomCraftable])) uc.craft(Craftable.values()[randomCraftable]);
+            // Craft aléatoire
+            Craftable[] craftables = Craftable.values();
+            Craftable craftable = craftables[(int)(uc.getRandomDouble() * craftables.length)];
+            if (uc.canCraft(craftable)) uc.craft(craftable);
 
-            /*Try gathering*/
+            // Gather si possible
             if (uc.canGather()) uc.gather();
 
-
-            uc.yield(); // End of turn
+            uc.yield();
         }
     }
 }
